@@ -1,0 +1,7 @@
+tests
+.github
+node_modules
+tsconfig.json
+vitest.config.js
+.env
+.DS_Store

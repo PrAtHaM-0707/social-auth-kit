@@ -1,0 +1,51 @@
+{
+  "name": "social-auth-kit",
+  "version": "1.0.0",
+  "description": "Simple social authentication toolkit for Node.js",
+  "main": "src/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": "./src/index.js",
+    "./middlewares": "./src/middlewares.js"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:types": "tsc --emitDeclarationOnly"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PrAtHaM-0707/social-auth-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PrAtHaM-0707/social-auth-kit/issues"
+  },
+  "homepage": "https://github.com/PrAtHaM-0707/social-auth-kit#readme",
+  "keywords": [
+    "google-auth",
+    "oauth",
+    "authentication",
+    "social-login",
+    "google-oauth",
+    "oauth2",
+    "google-login",
+    "node-auth",
+    "authentication-library",
+    "jwt-verification"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+  "node": ">=18"
+},
+  "dependencies": {
+    "google-auth-library": "^10.6.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

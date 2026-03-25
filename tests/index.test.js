@@ -44,7 +44,7 @@ describe("social-auth-kit", () => {
 
     it("should fail for missing clientId", async () => {
       const { verifyGoogleToken } = await import("../src/google/verifyGoogleToken.js");
-      await expect(verifyGoogleToken("a.b.c", "")).rejects.toThrowError("Google Client ID must be a string or an array of strings");
+      await expect(verifyGoogleToken("a.b.c", "")).rejects.toThrowError("Google Client ID must be provided");
     });
   });
 });

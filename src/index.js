@@ -17,6 +17,7 @@ import { SocialAuth } from "./SocialAuth.js";
  * @property {string|undefined} name - The full name of the user.
  * @property {string|undefined} picture - URL to the user profile photo.
  * @property {"google"} provider - The authentication provider name.
+ * @property {any} raw - The original, unparsed payload from the authentication provider.
  */
 
 /**
@@ -35,6 +36,7 @@ import { SocialAuth } from "./SocialAuth.js";
  * @typedef {Object} VerifyOptions
  * @property {number} [timeout=5000] - Verification timeout in milliseconds
  * @property {Object} [logger] - Optional logger object with error, warn, info, debug methods
+ * @property {string[]} [allowedDomains] - Optional list of allowed hosted domains (hd claim)
  * 
  * @param {string} token - The raw ID token received from the frontend.
  * @param {string|string[]} clientId - Your Google OAuth 2.0 Web Client ID(s).

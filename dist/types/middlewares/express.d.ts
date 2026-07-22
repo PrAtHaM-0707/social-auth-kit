@@ -41,6 +41,10 @@ export type ExpressGoogleAuthOptions = {
      */
     timeout?: number | undefined;
     /**
+     * - Optional list of allowed hosted domains (hd claim)
+     */
+    allowedDomains?: string[] | undefined;
+    /**
      * - Optional logger for debugging
      */
     logger?: LoggerConfig | null | undefined;

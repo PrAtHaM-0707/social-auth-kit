@@ -4,6 +4,7 @@
 /**
  * @typedef {Object} VerifyOptions
  * @property {number} [timeout] - Optional timeout override in milliseconds
+ * @property {string[]} [allowedDomains] - Optional list of allowed hosted domains (hd claim)
  * @property {Object} [logger] - Optional logger override
  */
 /**
@@ -89,6 +90,10 @@ export type VerifyOptions = {
      * - Optional timeout override in milliseconds
      */
     timeout?: number | undefined;
+    /**
+     * - Optional list of allowed hosted domains (hd claim)
+     */
+    allowedDomains?: string[] | undefined;
     /**
      * - Optional logger override
      */

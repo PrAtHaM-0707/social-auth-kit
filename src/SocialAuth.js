@@ -9,6 +9,7 @@ import { AUTH_ERRORS } from "./errors/codes.js";
 /**
  * @typedef {Object} VerifyOptions
  * @property {number} [timeout] - Optional timeout override in milliseconds
+ * @property {string[]} [allowedDomains] - Optional list of allowed hosted domains (hd claim)
  * @property {Object} [logger] - Optional logger override
  */
 
@@ -85,7 +86,8 @@ export class SocialAuth {
 
       const verifyOptions = {
         timeout: options.timeout ?? this.timeout,
-        logger: (options.logger ?? this.logger) || undefined
+        logger: (options.logger ?? this.logger) || undefined,
+        allowedDomains: options.allowedDomains || undefined
       };
 
       return await verifyGoogleToken(

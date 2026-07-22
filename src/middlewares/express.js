@@ -21,6 +21,7 @@ import { AUTH_ERRORS } from "../errors/codes.js";
  * @property {boolean} [required=true] - If false, authentication is optional
  * @property {string} [property="user"] - Property name to attach user to req (e.g., "user", "authUser")
  * @property {number} [timeout=5000] - Token verification timeout in milliseconds
+ * @property {string[]} [allowedDomains] - Optional list of allowed hosted domains (hd claim)
  * @property {LoggerConfig | null} [logger] - Optional logger for debugging
  * 
  * @param {ExpressGoogleAuthOptions} options Configuration options
@@ -66,6 +67,7 @@ export const expressGoogleAuth = (options) => {
     required = true,
     property = "user",
     timeout = 5000,
+    allowedDomains = null,
     logger = null
   } = options;
 
@@ -111,7 +113,8 @@ export const expressGoogleAuth = (options) => {
       // Verify the token
       const user = await verifyGoogleToken(token, clientId, {
         timeout,
-        logger: logger || undefined
+        logger: logger || undefined,
+        allowedDomains: allowedDomains || undefined
       });
 
       // Attach user to the request object using the specified property

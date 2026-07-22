@@ -71,7 +71,8 @@ app.post(
   "/api/auth/google",
   expressGoogleAuth({
     clientId: process.env.GOOGLE_CLIENT_ID,
-    timeout: 5000  // 5 second timeout
+    timeout: 5000, // 5 second timeout
+    allowedDomains: ["yourcompany.com"] // Optional: Restrict to G Suite domain
   }),
   (req, res) => {
     res.json({
@@ -145,7 +146,9 @@ const auth = new SocialAuth({
 });
 
 // Use it in your app
-const user = await auth.verify("google", idToken);
+const user = await auth.verify("google", idToken, {
+  allowedDomains: ["yourcompany.com"] // Optional override
+});
 ```
 
 ### Manual Token Extraction

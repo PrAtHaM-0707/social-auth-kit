@@ -86,15 +86,16 @@ function validateClientId(clientId) {
  * @property {Function} [logger.warn] - Warning logging function
  * @property {Function} [logger.info] - Info logging function
  * @property {Function} [logger.debug] - Debug logging function
+ * @property {string[]} [allowedDomains] - Optional list of allowed hosted domains (hd claim)
  * 
  * @param {string} token - The raw ID token from the client.
  * @param {string | string[]} clientId - Your Google OAuth 2.0 Web Client ID(s).
  * @param {VerifyOptions} [options={}] - Additional options for verification.
- * @returns {Promise<{id: string, email: string|undefined, name: string|undefined, picture: string|undefined, provider: "google"}>}
+ * @returns {Promise<{id: string, email: string|undefined, name: string|undefined, picture: string|undefined, provider: "google", raw: any}>}
  * @throws {AuthError} If validation or verification fails.
  */
 export async function verifyGoogleToken(token, clientId, options = {}) {
-  const { timeout = 5000, logger = null } = options;
+  const { timeout = 5000, logger = null, allowedDomains = null } = options;
 
   // 1. INPUT VALIDATION LAYER
   if (!token || typeof token !== "string") {
@@ -217,6 +218,18 @@ export async function verifyGoogleToken(token, clientId, options = {}) {
       );
     }
 
+    // Hosted Domain (hd) Check
+    if (allowedDomains && Array.isArray(allowedDomains)) {
+      if (!payload.hd || !allowedDomains.includes(payload.hd)) {
+        logger?.warn?.("Security Alert: User domain is not allowed", { hd: payload.hd });
+        throw new AuthError(
+          "User domain is not authorized",
+          AUTH_ERRORS.DOMAIN_NOT_ALLOWED,
+          403
+        );
+      }
+    }
+
     // Ensure the token audience matches our Client ID (Redundant but safe)
     const audiences = Array.isArray(clientId) ? clientId : [clientId];
     if (!audiences.includes(payload.aud)) {
@@ -238,7 +251,8 @@ export async function verifyGoogleToken(token, clientId, options = {}) {
       email: payload.email,
       name: payload.name,
       picture: payload.picture,
-      provider: "google"
+      provider: "google",
+      raw: payload
     });
   } catch (error) {
     // Pass through custom errors

@@ -25,6 +25,7 @@ Highly optimized, production-grade social authentication toolkit for Node.js.
   - Strict Issuer (`iss`) validation against Google domains
   - Audience (`aud`) matching to prevent account hijacking
   - Email verification (`email_verified`) enforcement
+  - Enterprise Hosted Domain (`hd`) validation via `allowedDomains`
   - Cryptographic signature verification via Google's official library
 - **TypeScript Support**: Full JSDoc type definitions for better DX
 - **Optional Logger**: Built-in logging support for debugging
@@ -180,6 +181,7 @@ Our verification layer implements best practices from Google Cloud Platform:
 ```typescript
 interface VerifyOptions {
   timeout?: number;  // Verification timeout in ms (default: 5000)
+  allowedDomains?: string[]; // Optional list of allowed hosted domains (hd claim)
   logger?: {
     error?: (msg: string, meta?: any) => void;
     warn?: (msg: string, meta?: any) => void;
@@ -275,6 +277,7 @@ console.log(user.email);    // string | undefined
 console.log(user.name);     // string | undefined
 console.log(user.picture);  // string | undefined
 console.log(user.provider); // "google"
+console.log(user.raw);      // any (Original Google payload)
 ```
 
 ## 🎯 Production Best Practices

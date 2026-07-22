@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-07-22
+### Added
+- **Enterprise Hosted Domain Validation**: Support for `allowedDomains` configuration to restrict login to specific Google Workspace domains (hd claim).
+- **Raw Payload Access**: The returned user object now automatically includes a `raw` property containing the full, unparsed Google payload, allowing access to custom fields (e.g., `given_name`, `locale`).
+- **New error code**: `DOMAIN_NOT_ALLOWED` for when a user's domain is not in the `allowedDomains` list.
+
 ## [1.1.0] - 2026-03-25
 ### Added
 - **Thread-safe OAuth2Client singleton**: Promise-based lazy initialization prevents race conditions under high concurrency

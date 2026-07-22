@@ -83,6 +83,26 @@ app.post(
 );
 ```
 
+### Next.js App Router (Route Handlers)
+
+```javascript
+// app/api/auth/route.js
+import { nextGoogleAuth } from "social-auth-kit/middlewares";
+
+export const GET = nextGoogleAuth({
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  timeout: 5000 // 5 second timeout
+})(
+  async (req, context) => {
+    // req.user is automatically populated on success!
+    return Response.json({
+      message: `Welcome to Next.js, ${req.user.name}!`,
+      user: req.user
+    });
+  }
+);
+```
+
 ### Express Middleware (Optional Authentication)
 
 ```javascript

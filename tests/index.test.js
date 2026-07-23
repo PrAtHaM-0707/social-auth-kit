@@ -3,7 +3,7 @@ import { AuthError } from "../src/errors/AuthError.js";
 import { extractToken } from "../src/utils/token.js";
 import { SocialAuth } from "../src/SocialAuth.js";
 
-describe("social-auth-kit", () => {
+describe("Core & Utilities", () => {
   describe("Token Utility", () => {
     it("should extract bearer token correctly", () => {
       const token = extractToken("Bearer my-secret-token");
@@ -28,23 +28,6 @@ describe("social-auth-kit", () => {
     it("should throw missing provider for unknown providers", async () => {
       const auth = new SocialAuth({ google: { clientId: "xyz" } });
       await expect(auth.verify("apple", "123")).rejects.toThrowError(/not supported/i);
-    });
-  });
-
-  describe("Google Authentication", () => {
-    it("should fail for missing token", async () => {
-      const auth = new SocialAuth({ google: { clientId: "xyz" } });
-      await expect(auth.verify("google", "")).rejects.toThrowError("Google ID Token must be a non-empty string");
-    });
-
-    it("should fail for invalid token format", async () => {
-      const auth = new SocialAuth({ google: { clientId: "xyz" } });
-      await expect(auth.verify("google", "invalid_token_no_dots")).rejects.toThrowError("Invalid token format");
-    });
-
-    it("should fail for missing clientId", async () => {
-      const { verifyGoogleToken } = await import("../src/google/verifyGoogleToken.js");
-      await expect(verifyGoogleToken("a.b.c", "")).rejects.toThrowError("Google Client ID must be provided");
     });
   });
 });

@@ -29,8 +29,8 @@ Highly optimized, production-grade social authentication toolkit for Node.js.
   - Cryptographic signature verification via Google's official library
 - **TypeScript Support**: Full JSDoc type definitions for better DX
 - **Optional Logger**: Built-in logging support for debugging
-- **Flexible Middleware**: Optional authentication, custom property names
-- **Framework Independent**: Express, NestJS, Fastify, Next.js, and more
+- **Zero-Boilerplate Middlewares**: Native wrappers for **Express.js** and **Next.js** (App Router)
+- **Framework Independent Core**: The core verification function works with Fastify, NestJS, Koa, and any Node.js environment
 
 ## 📦 Installation
 
@@ -367,8 +367,8 @@ A: No, this library only verifies tokens. Session/user management is your respon
 **Q: Does it support other providers (GitHub, Apple, Microsoft)?**  
 A: Currently Google only. Future versions will support additional providers.
 
-**Q: Can I use this with frameworks other than Express?**  
-A: Yes! The core `verifyGoogleToken()` is framework-agnostic. Only the middleware is Express-specific.
+**Q: Can I use this with frameworks other than Express or Next.js?**  
+A: Yes! The core `verifyGoogleToken()` is completely framework-agnostic and works perfectly in Fastify, NestJS, Koa, etc. The package just provides extra native middlewares for Express and Next.js to make integration zero-boilerplate.
 
 **Q: What about clock skew?**  
 A: We allow 5 minutes of clock skew to handle distributed system timing differences.

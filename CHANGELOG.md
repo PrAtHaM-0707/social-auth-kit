@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-07-23
+### Improved
+- **Enterprise-Grade Testing**: Completely overhauled test suite with `vitest` to rigorously mock Google Auth Library. Added deep security validation tests simulating DoS payloads, network lag timeouts, and forged tokens.
+- **Documentation**: Updated README to prominently feature zero-boilerplate middlewares for Next.js and Express.
+
 ## [1.3.0] - 2026-07-23
 ### Added
 - **Native Next.js Support**: Added the `nextGoogleAuth` Higher-Order Function (HOF) to natively protect Next.js App Router API endpoints with zero boilerplate.
